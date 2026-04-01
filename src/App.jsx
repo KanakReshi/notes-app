@@ -16,6 +16,13 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('notes-app-theme') !== 'light'
   })
+  const notesWithDetails = task.filter(note => note.details.trim().length > 0).length
+  const draftCharacters = title.trim().length + details.trim().length
+  const draftStatus = editIndex !== null
+    ? 'Editing note'
+    : draftCharacters > 0
+      ? 'Draft in progress'
+      : 'Ready to create'
 
   useEffect(() => {
     localStorage.setItem('notes-app-tasks', JSON.stringify(task))
@@ -112,6 +119,43 @@ const App = () => {
             )}
           </div>
         </form>
+
+        <section className="sidebar-insights">
+          <div className="insights-card">
+            <div className="insights-header">
+              <p className="insights-eyebrow">Workspace Snapshot</p>
+              <span className="insights-status">{draftStatus}</span>
+            </div>
+
+            <div className="insights-grid">
+              <div className="insight-tile">
+                <span className="insight-value">{task.length}</span>
+                <span className="insight-label">Total notes</span>
+              </div>
+              <div className="insight-tile">
+                <span className="insight-value">{notesWithDetails}</span>
+                <span className="insight-label">Detailed notes</span>
+              </div>
+              <div className="insight-tile">
+                <span className="insight-value">{draftCharacters}</span>
+                <span className="insight-label">Draft chars</span>
+              </div>
+            </div>
+
+            <div className="palette-preview">
+              <p className="palette-title">Note palette</p>
+              <div className="palette-swatches">
+                {NOTE_COLORS.map((color) => (
+                  <span
+                    key={color}
+                    className="palette-swatch"
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         <p className="note-count">
           {task.length} note{task.length !== 1 ? 's' : ''} saved
