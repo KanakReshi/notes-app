@@ -183,15 +183,47 @@ const App = () => {
               <div
                 key={idx}
                 className={`note-card${editIndex === idx ? ' note-card--active' : ''}`}
-                style={{ backgroundColor: elem.color ?? '#fef08a' }}
               >
-                <div className="note-body">
+                <div className="note-rings" aria-hidden="true">
+                  {Array.from({ length: 6 }).map((_, ringIdx) => (
+                    <span key={ringIdx} className="note-ring" />
+                  ))}
+                </div>
+                <div
+                  className="note-body"
+                  onClick={() => editNote(idx)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      editNote(idx)
+                    }
+                  }}
+                  title="Click to edit note"
+                >
                   <h3 className="note-title">{elem.title}</h3>
                   <p className="note-details">{elem.details}</p>
                 </div>
                 <div className="note-actions">
-                  <button onClick={() => editNote(idx)} className="note-btn note-btn--edit">Edit</button>
-                  <button onClick={() => deleteNote(idx)} className="note-btn note-btn--delete">Delete</button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      editNote(idx)
+                    }}
+                    className="note-btn note-btn--edit"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      deleteNote(idx)
+                    }}
+                    className="note-btn note-btn--delete"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

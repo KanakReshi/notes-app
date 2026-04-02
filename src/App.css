@@ -512,11 +512,12 @@ body,
 .notes-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 160px));
+    gap: 24px;
     overflow-y: auto;
     padding-right: 4px;
     align-content: start;
+    justify-content: start;
 }
 
 .notes-grid::-webkit-scrollbar {
@@ -537,82 +538,109 @@ body,
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 18px;
-    padding: 16px;
-    min-height: 185px;
-    color: #1e1b30;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    align-items: flex-start;
+    width: 160px;
+    min-height: 254px;
+    padding: 22px 14px 14px;
+    border-radius: 0 0 10px 10px;
+    color: #202020;
+    background:
+        repeating-linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0,
+            rgba(0, 0, 0, 0) 37px,
+            rgba(190, 183, 117, 0.28) 37px,
+            rgba(190, 183, 117, 0.28) 39px),
+        linear-gradient(180deg, #faf6d9 0%, #f5efc7 100%);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
     overflow: hidden;
 }
 
 .note-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 18px 18px 0 0;
+    height: 20px;
+    background: #fbf8df;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .note-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
 }
 
 .note-card--active {
-    outline: 2.5px solid #6366f1;
+    outline: 2px solid #111827;
     outline-offset: 3px;
+}
+
+.note-rings {
+    position: absolute;
+    top: -8px;
+    left: 14px;
+    right: 14px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.note-ring {
+    width: 12px;
+    height: 24px;
+    background: #111111;
+    border-radius: 999px;
 }
 
 .note-body {
     flex: 1;
+    width: 100%;
     overflow: hidden;
+    cursor: pointer;
+    padding-top: 16px;
+    position: relative;
+    z-index: 1;
 }
 
 .note-title {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 800;
     word-break: break-word;
-    line-height: 1.4;
-    color: #1a1730;
+    line-height: 1.15;
+    color: #171717;
 }
 
 .note-details {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(30, 27, 48, 0.65);
+    margin-top: 18px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7a7a7a;
     word-break: break-word;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    line-height: 1.25;
+    white-space: pre-line;
     overflow: hidden;
 }
 
 /* note action buttons */
 .note-actions {
     display: flex;
+    width: 100%;
+    margin-top: 12px;
     gap: 8px;
-    margin-top: 14px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.note-card:hover .note-actions {
-    opacity: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .note-btn {
     flex: 1;
     padding: 6px 0;
     border: none;
-    border-radius: 8px;
-    font-size: 11.5px;
+    border-radius: 6px;
+    font-size: 11px;
     font-weight: 700;
     font-family: inherit;
     cursor: pointer;
@@ -624,19 +652,19 @@ body,
 }
 
 .note-btn--edit {
-    background: rgba(255, 255, 255, 0.65);
-    color: #1a1730;
+    background: #111827;
+    color: #f9fafb;
 }
 
 .note-btn--edit:hover {
-    background: rgba(255, 255, 255, 0.95);
+    background: #1f2937;
 }
 
 .note-btn--delete {
-    background: rgba(239, 68, 68, 0.75);
+    background: #ef4444;
     color: #fff;
 }
 
 .note-btn--delete:hover {
-    background: rgba(239, 68, 68, 1);
+    background: #dc2626;
 }
